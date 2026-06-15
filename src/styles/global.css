@@ -1,5 +1,21 @@
 @import "tailwindcss";
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
 
+:root {
+  --pine: #1d3027;
+  --pine-deep: #16261f;
+  --moss: #48604f;
+  --sage: #9fb3a3;
+  --paper: #f4f1e8;
+  --ink: #2d3330;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Karla', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
