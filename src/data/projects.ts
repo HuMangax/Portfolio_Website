@@ -5,6 +5,7 @@ export type Project = {
   tags: string[]
   link?: string
   image?: string
+  imagePosition?: string
 }
 
 export const projects: Project[] = [
@@ -37,7 +38,8 @@ export const projects: Project[] = [
     date: "Jan - Feb 2026",
     description: "Classic Tetris with a strategic twist — players can store a block and swap it with the current falling block at any time.",
     tags: ["Game dev", "Unity", "C#", "Personal project"],
-    //image: "/images/projects/tetris-game.png",
+    image: "/images/projects/tetris-game.png",
+    imagePosition: "center bottom",
   },
   {
     title: "Minesweeper Game",

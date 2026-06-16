@@ -1,0 +1,242 @@
+<header id="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">4th year Computer Science Student & Software Engineer</p>
+    <h1><em>Max Huang</em></h1>
+    <p class="tagline">Software Engineer with a passion for creating intuitive and user-friendly applications.</p>
+    <div class="cta-row">
+      <a href="#projects" class="btn-primary">View projects</a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+  </div>
+
+  <!-- Layered pine treelines -->
+  <div class="hero-art" aria-hidden="true">
+    <svg class="trees back" viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax meet" fill="#6b8270">
+      <g>
+        <path d="M40 200 L70 90 L100 200 Z"/>
+        <path d="M150 200 L185 60 L220 200 Z"/>
+        <path d="M280 200 L305 110 L330 200 Z"/>
+        <path d="M400 200 L440 70 L480 200 Z"/>
+        <path d="M540 200 L565 100 L590 200 Z"/>
+        <path d="M660 200 L700 55 L740 200 Z"/>
+        <path d="M800 200 L825 105 L850 200 Z"/>
+        <path d="M920 200 L960 75 L1000 200 Z"/>
+        <path d="M1060 200 L1085 95 L1110 200 Z"/>
+        <path d="M1180 200 L1220 65 L1260 200 Z"/>
+        <path d="M1320 200 L1345 110 L1370 200 Z"/>
+      </g>
+    </svg>
+    <svg class="trees mid" viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax meet" fill="#3f5847">
+      <g>
+        <path d="M20 200 L60 70 L100 200 Z"/>
+        <path d="M120 200 L150 120 L180 200 Z"/>
+        <path d="M230 200 L275 50 L320 200 Z"/>
+        <path d="M360 200 L390 115 L420 200 Z"/>
+        <path d="M480 200 L525 60 L570 200 Z"/>
+        <path d="M620 200 L650 110 L680 200 Z"/>
+        <path d="M740 200 L785 55 L830 200 Z"/>
+        <path d="M880 200 L910 115 L940 200 Z"/>
+        <path d="M1000 200 L1045 65 L1090 200 Z"/>
+        <path d="M1140 200 L1170 110 L1200 200 Z"/>
+        <path d="M1260 200 L1305 55 L1350 200 Z"/>
+      </g>
+    </svg>
+    <svg class="trees front" viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax meet" fill="#1d3027">
+      <g>
+        <path d="M0 200 L50 40 L100 200 Z"/>
+        <path d="M130 200 L165 90 L200 200 Z"/>
+        <path d="M250 200 L310 30 L370 200 Z"/>
+        <path d="M410 200 L445 85 L480 200 Z"/>
+        <path d="M540 200 L600 35 L660 200 Z"/>
+        <path d="M700 200 L735 90 L770 200 Z"/>
+        <path d="M830 200 L890 30 L950 200 Z"/>
+        <path d="M990 200 L1025 85 L1060 200 Z"/>
+        <path d="M1120 200 L1180 35 L1240 200 Z"/>
+        <path d="M1300 200 L1335 85 L1370 200 Z"/>
+        <path d="M1410 200 L1440 60 L1470 200 Z"/>
+      </g>
+    </svg>
+    <div class="mist mist-1"></div>
+    <div class="mist mist-2"></div>
+  </div>
+
+<style>
+  header {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, #f6f3ea 0%, #edeadd 55%, #dfe2d3 100%);
+    overflow: hidden;
+  }
+
+  /* ---- Content ---- */
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 140px 24px 200px;
+    width: 100%;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* the little line before the eyebrow text */
+  .eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--moss);
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    line-height: 1.06;
+    color: var(--pine-deep);
+    letter-spacing: -0.01em;
+    max-width: 14ch;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--moss);
+  }
+
+  .tagline {
+    margin-top: 26px;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--ink);
+    max-width: 46ch;
+    opacity: 0.85;
+  }
+
+  .cta-row {
+    margin-top: 40px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary, .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    padding: 13px 26px;
+    border-radius: 99px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--pine);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover {
+    background: var(--pine-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -10px rgba(29, 48, 39, 0.55);
+  }
+
+  .btn-ghost {
+    border: 1.5px solid var(--moss);
+    color: var(--pine);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(159, 179, 163, 0.18);
+    transform: translateY(-2px);
+  }
+
+  /* ---- Treelines ---- */
+  .hero-art {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .trees {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-width: 900px;
+  }
+
+  /* each layer sways at a different speed */
+  .back  { opacity: 0.16; animation: sway 14s ease-in-out infinite alternate; }
+  .mid   { opacity: 0.30; animation: sway 11s ease-in-out infinite alternate-reverse; }
+  .front { opacity: 0.50; }
+
+  @keyframes sway {
+    from { transform: translateX(0) translateY(0); }
+    to   { transform: translateX(-28px) translateY(-4px); }
+  }
+
+  /* ---- Mist layers ---- */
+  .mist {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(244,241,232,0.9), rgba(244,241,232,0) 70%);
+    filter: blur(8px);
+  }
+
+  .mist-1 { bottom: 90px; animation: drift 26s linear infinite; }
+  .mist-2 { bottom: 30px; opacity: 0.7; animation: drift 34s linear infinite reverse; }
+
+  @keyframes drift {
+    from { transform: translateX(-4%); }
+    to   { transform: translateX(4%); }
+  }
+
+  /* ---- Entry animations ---- */
+  .eyebrow, h1, .tagline, .cta-row {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: rise 0.9s cubic-bezier(.22,.8,.32,1) forwards;
+  }
+
+  h1       { animation-delay: 0.12s; }
+  .tagline { animation-delay: 0.26s; }
+  .cta-row { animation-delay: 0.40s; }
+
+  @keyframes rise {
+    to { opacity: 1; transform: none; }
+  }
+
+  /* ---- Reduced motion ---- */
+  @media (prefers-reduced-motion: reduce) {
+    .eyebrow, h1, .tagline, .cta-row {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+    .back  { opacity: 0.35; animation: sway 14s ease-in-out infinite alternate; }
+    .mid   { opacity: 0.65; animation: sway 11s ease-in-out infinite alternate-reverse; }
+    .front { opacity: 1; }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 560px) {
+    .hero-inner { padding: 120px 20px 160px; }
+  }
+</style>

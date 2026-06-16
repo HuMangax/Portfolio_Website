@@ -16,7 +16,7 @@ function GithubIcon({ size = 16 }: { size?: number }) {
   )
 }
 
-export default function ProjectCard({ title, date, description, tags, image, link }: Project) {
+export default function ProjectCard({ title, date, description, tags, image, imagePosition, link }: Project) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
@@ -30,7 +30,8 @@ export default function ProjectCard({ title, date, description, tags, image, lin
         <img
           src={image}
           alt={title}
-          class="w-full h-44 object-cover"
+          className="w-full h-44 object-cover"
+          style={{ objectPosition: imagePosition ?? "center" }}
         />
       )}
       <div className="p-8 flex flex-col gap-4 flex-1">

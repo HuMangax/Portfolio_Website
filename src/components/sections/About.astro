@@ -1,0 +1,222 @@
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">About</p>
+      <h2>Professional Summary</h2>
+    </div>
+
+    <div class="about-grid">
+      <!-- Left: headshot + bio -->
+      <div class="about-main reveal">
+        <img
+          src="/images/headshot.png"
+          alt="Max Huang"
+          class="headshot"
+          width="160"
+          height="160"
+          loading="lazy"
+        />
+        <div class="bio">
+          <p>I'm a 4th-year Computer Science student at UBC with hands-on experience in full-stack development, test automation, and AI-integrated applications.</p>
+          <p>I care about writing clean, reliable code and building experiences that feel effortless to use — whether that's a finance dashboard, a test framework that saves a team dozens of hours, or an arcade game built purely for the joy of it.</p>
+        </div>
+      </div>
+
+      <!-- Right: education card -->
+      <aside class="edu-card reveal">
+        <h3>University of British Columbia</h3>
+        <p class="edu-meta">BSc Computer Science · Sep 2022 – May 2028 (expected)</p>
+        <h4>Relevant coursework</h4>
+        <ul class="course-list">
+          <li>Data Structures &amp; Algorithms</li>
+          <li>Software Construction</li>
+          <li>Relational Databases</li>
+          <li>Machine Learning</li>
+          <li>Artificial Intelligence</li>
+          <li>Computer Graphics</li>
+          <li>Computer Networking</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 108px 0;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Section heading ---- */
+  .sec-head {
+    margin-bottom: 52px;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow::after {
+    content: "";
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    color: var(--pine-deep);
+    line-height: 1.15;
+  }
+
+  /* ---- Two-column layout ---- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* ---- Headshot + bio ---- */
+  .about-main {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .headshot {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--sage);
+    box-shadow: 0 12px 28px -14px rgba(29, 48, 39, 0.4);
+    object-position: 80% center;
+    
+  }
+
+  .bio {
+    font-size: 1.12rem;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+
+  .bio p + p {
+    margin-top: 18px;
+  }
+
+  /* ---- Education card ---- */
+  .edu-card {
+    background: var(--paper-dim, #ece8db);
+    border: 1px solid rgba(45, 51, 48, 0.14);
+    border-radius: 18px;
+    padding: 30px 28px;
+  }
+
+  .edu-card h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.18rem;
+    color: var(--pine);
+    line-height: 1.35;
+  }
+
+  .edu-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--moss);
+    margin: 8px 0 18px;
+    letter-spacing: 0.04em;
+  }
+
+  .edu-card h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    margin-bottom: 10px;
+  }
+
+  .course-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .course-list li {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--pine);
+    background: rgba(159, 179, 163, 0.28);
+    padding: 5px 12px;
+    border-radius: 99px;
+  }
+
+  /* ---- Scroll reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 880px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    section {
+      padding: 84px 0;
+    }
+  }
+</style>
+
+<script>
+  // Scroll-triggered reveal
+  const els = document.querySelectorAll('#about .reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>
