@@ -1,0 +1,304 @@
+---
+import { experience } from "../../data/experience"
+---
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Experience</p>
+      <h2>Where I've worked</h2>
+    </div>
+
+    <ol class="timeline">
+      {experience.map((item, i) => (
+        <li class="entry reveal" style={`transition-delay:${i * 90}ms`}>
+          <div class="card">
+            <div class="card-head">
+              <div class="title-group">
+                <h3 class="role">{item.role}</h3>
+                <p class="company">{item.company}</p>
+              </div>
+              <div class="meta">
+                <span class="kind">{item.kind}</span>
+                <span class="date">{item.date}</span>
+              </div>
+            </div>
+
+            <ul class="bullets">
+              {item.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+
+            <div class="tags">
+              {item.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 108px 0;
+    background: var(--paper-dim);
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Section heading ---- */
+  .sec-head {
+    margin-bottom: 52px;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow::after {
+    content: "";
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    color: var(--pine-deep);
+    line-height: 1.15;
+  }
+
+  /* ---- Timeline ---- */
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  /* the vertical rail */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: linear-gradient(var(--sage), rgba(159, 179, 163, 0.2));
+  }
+
+  .entry {
+    position: relative;
+    padding-left: 46px;
+  }
+
+  .entry + .entry {
+    margin-top: 26px;
+  }
+
+  /* the node on the rail */
+  .entry::before {
+    content: "";
+    position: absolute;
+    left: 1px;
+    top: 6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--moss);
+    box-shadow: 0 0 0 4px rgba(159, 179, 163, 0.18);
+    z-index: 1;
+  }
+
+  /* ---- Card ---- */
+  .card {
+    background: #fff;
+    border: 1px solid rgba(45, 51, 48, 0.12);
+    border-radius: 18px;
+    padding: 26px 28px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .entry:hover .card {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px -18px rgba(29, 48, 39, 0.45);
+  }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .role {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--pine-deep);
+    line-height: 1.3;
+  }
+
+  .company {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--moss);
+    margin-top: 3px;
+  }
+
+  .meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .kind {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pine);
+    background: rgba(159, 179, 163, 0.28);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+
+  .date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--moss);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---- Bullets (little pine-triangle markers) ---- */
+  .bullets {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bullets li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .bullets li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 7px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid var(--sage);
+  }
+
+  /* ---- Tags ---- */
+  .tags {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(45, 51, 48, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--moss);
+    border: 1px solid rgba(72, 96, 79, 0.35);
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+
+  /* ---- Scroll reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 640px) {
+    section {
+      padding: 84px 0;
+    }
+
+    .entry {
+      padding-left: 36px;
+    }
+
+    .card {
+      padding: 22px 20px;
+    }
+
+    .card-head {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .meta {
+      flex-direction: row;
+      align-items: center;
+      align-self: flex-start;
+      gap: 12px;
+    }
+  }
+</style>
+
+<script>
+  // Scroll-triggered reveal
+  const els = document.querySelectorAll('#experience .reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>
