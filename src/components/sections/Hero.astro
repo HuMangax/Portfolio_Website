@@ -1,11 +1,28 @@
+---
+const resumeMailto =
+  "mailto:huangmax1039@gmail.com" +
+  "?subject=" + encodeURIComponent("Résumé request") +
+  "&body=" + encodeURIComponent(
+    "Hi Max,\n\nI came across your portfolio and would love a copy of your résumé.\n\nThanks!"
+  );
+---
+
 <header id="hero">
   <div class="hero-inner">
-    <p class="eyebrow">4th year Computer Science Student & Software Engineer</p>
+    <p class="eyebrow">4th year Computer Science Student &amp; Software Engineer</p>
     <h1><em>Max Huang</em></h1>
     <p class="tagline">Software Engineer with a passion for creating intuitive and user-friendly applications.</p>
     <div class="cta-row">
       <a href="#projects" class="btn-primary">View projects</a>
       <a href="#contact" class="btn-ghost">Get in touch</a>
+      <a href={resumeMailto} class="btn-ghost btn-resume" data-resume-request>
+        <svg class="btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <path d="M14 2v6h6" />
+          <path d="M9 13h6M9 17h6" />
+        </svg>
+        Request résumé
+      </a>
     </div>
   </div>
 
@@ -60,6 +77,12 @@
     <div class="mist mist-2"></div>
   </div>
 
+  <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13M6 12l6 6 6-6"/></svg>
+  </a>
+</header>
+
 <style>
   header {
     position: relative;
@@ -98,6 +121,8 @@
     width: 34px;
     height: 1px;
     background: var(--moss);
+    transform-origin: left center;
+    animation: line-grow 0.7s cubic-bezier(.22,.8,.32,1) 0.15s both;
   }
 
   h1 {
@@ -108,11 +133,16 @@
     color: var(--pine-deep);
     letter-spacing: -0.01em;
     max-width: 14ch;
+    overflow: hidden;
+    padding-bottom: 0.16em;
   }
 
   h1 em {
+    display: inline-block;
     font-style: italic;
     color: var(--moss);
+    transform: translateY(115%);
+    animation: name-rise 1s cubic-bezier(.22,.8,.32,1) 0.18s forwards;
   }
 
   .tagline {
@@ -133,13 +163,14 @@
   .btn-primary, .btn-ghost {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
     font-weight: 700;
     font-size: 0.9rem;
     letter-spacing: 0.03em;
     text-decoration: none;
     padding: 13px 26px;
     border-radius: 99px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   }
 
   .btn-primary {
@@ -163,11 +194,17 @@
     transform: translateY(-2px);
   }
 
+  .btn-ico {
+    width: 16px;
+    height: 16px;
+  }
+
   /* ---- Treelines ---- */
   .hero-art {
     position: absolute;
     inset: 0;
     pointer-events: none;
+    animation: art-in 1.6s ease 0.1s both;
   }
 
   .trees {
@@ -208,28 +245,92 @@
     to   { transform: translateX(4%); }
   }
 
+  /* ---- Scroll cue ---- */
+  .scroll-cue {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    text-decoration: none;
+    opacity: 0;
+    animation: cue-in 0.9s ease 1.3s forwards;
+  }
+
+  .scroll-cue svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: bob 1.8s ease-in-out infinite;
+  }
+
+  .scroll-cue:hover {
+    color: var(--pine);
+  }
+
   /* ---- Entry animations ---- */
-  .eyebrow, h1, .tagline, .cta-row {
+  .eyebrow, .tagline, .cta-row {
     opacity: 0;
     transform: translateY(18px);
     animation: rise 0.9s cubic-bezier(.22,.8,.32,1) forwards;
   }
 
-  h1       { animation-delay: 0.12s; }
-  .tagline { animation-delay: 0.26s; }
-  .cta-row { animation-delay: 0.40s; }
+  .eyebrow { animation-delay: 0.05s; }
+  .tagline { animation-delay: 0.5s; }
+  .cta-row { animation-delay: 0.64s; }
 
   @keyframes rise {
     to { opacity: 1; transform: none; }
   }
 
+  @keyframes name-rise {
+    to { transform: translateY(0); }
+  }
+
+  @keyframes line-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  @keyframes art-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes cue-in {
+    to { opacity: 1; }
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50%      { transform: translateY(5px); opacity: 1; }
+  }
+
   /* ---- Reduced motion ---- */
   @media (prefers-reduced-motion: reduce) {
-    .eyebrow, h1, .tagline, .cta-row {
+    .eyebrow, .tagline, .cta-row {
       opacity: 1;
       transform: none;
       animation: none;
     }
+    .eyebrow::before { animation: none; }
+    h1 em { transform: none; animation: none; }
+    .hero-art { animation: none; }
+    .scroll-cue { opacity: 1; animation: none; }
+    .scroll-cue svg { animation: none; }
     .back  { opacity: 0.35; animation: sway 14s ease-in-out infinite alternate; }
     .mid   { opacity: 0.65; animation: sway 11s ease-in-out infinite alternate-reverse; }
     .front { opacity: 1; }
@@ -238,5 +339,34 @@
   /* ---- Mobile ---- */
   @media (max-width: 560px) {
     .hero-inner { padding: 120px 20px 160px; }
+    .scroll-cue { display: none; }
   }
 </style>
+
+<script>
+  const header = document.getElementById('hero');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (header && !reduce) {
+    const art = header.querySelector<HTMLElement>('.hero-art');
+    const inner = header.querySelector<HTMLElement>('.hero-inner');
+    let ticking = false;
+
+    const update = () => {
+      const y = window.scrollY;
+      if (art) art.style.transform = `translateY(${y * 0.25}px)`;
+      if (inner) {
+        inner.style.transform = `translateY(${y * 0.1}px)`;
+        inner.style.opacity = String(Math.max(1 - y / 650, 0));
+      }
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+</script>

@@ -1,12 +1,13 @@
 ---
 import '../styles/global.css'
 import Projects from '../components/sections/Projects.astro'
-// import Nav from '../components/Nav.astro'
+import Nav from '../components/Nav.astro'
 import Hero from '../components/sections/Hero.astro'
 import About from '../components/sections/About.astro'
 import Experience from '../components/sections/Experience.astro'
-// import Skills from '../components/sections/Skills.astro'
-// import Contact from '../components/sections/Contact.astro'
+import Skills from '../components/sections/Skills.astro'
+import Contact from '../components/sections/Contacts.astro'
+import ResumeModal from '../components/ResumeModal.astro'
 ---
 
 <html lang="en">
@@ -15,12 +16,17 @@ import Experience from '../components/sections/Experience.astro'
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Max Huang</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    <Nav />
     <Hero />
     <About />
+    <Skills />
     <Experience />
     <Projects />
+    <Contact />
+    <ResumeModal />
   </body>
   
 </html>

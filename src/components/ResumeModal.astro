@@ -1,0 +1,396 @@
+---
+const email = "huangmax1039@gmail.com";
+// Optional: set this to a form endpoint (e.g. a Formspree URL like
+// "https://formspree.io/f/xxxxxxx") to have requests delivered automatically.
+// When left empty, submitting composes an email to the address above instead.
+const FORM_ENDPOINT = "";
+---
+
+<div class="resume-modal" id="resume-modal" data-endpoint={FORM_ENDPOINT} data-email={email} hidden>
+  <div class="rm-backdrop" data-rm-close></div>
+
+  <div class="rm-card" role="dialog" aria-modal="true" aria-labelledby="rm-title">
+    <button class="rm-close" type="button" aria-label="Close" data-rm-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
+    </button>
+
+    <form class="rm-form" id="rm-form" novalidate>
+      <h2 id="rm-title">Request résumé</h2>
+      <p class="rm-sub">I'll send it over to you directly.</p>
+
+      <label class="rm-field">
+        <span class="rm-label">Name</span>
+        <input type="text" name="name" required placeholder="Your name" autocomplete="name" />
+      </label>
+
+      <label class="rm-field">
+        <span class="rm-label">Email</span>
+        <input type="email" name="email" required placeholder="you@example.com" autocomplete="email" />
+      </label>
+
+      <label class="rm-field">
+        <span class="rm-label">Message <em>(optional)</em></span>
+        <textarea name="message" rows="3" placeholder="Anything you'd like to share..."></textarea>
+      </label>
+
+      <button type="submit" class="rm-submit">Send request</button>
+    </form>
+
+    <div class="rm-success" hidden>
+      <div class="rm-check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </div>
+      <h2>Request sent</h2>
+      <p>Thanks — I'll get my résumé over to you shortly.</p>
+      <button type="button" class="rm-done" data-rm-close>Close</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .resume-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+  }
+
+  .resume-modal[hidden] {
+    display: none;
+  }
+
+  .rm-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(22, 38, 31, 0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .rm-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 460px;
+    background: #faf8f1;
+    border: 1px solid rgba(45, 51, 48, 0.08);
+    border-radius: 22px;
+    padding: 34px;
+    box-shadow: 0 30px 70px -20px rgba(22, 38, 31, 0.55);
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(.22, .8, .32, 1);
+  }
+
+  .resume-modal.open .rm-backdrop {
+    opacity: 1;
+  }
+  .resume-modal.open .rm-card {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---- Close button ---- */
+  .rm-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--moss);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .rm-close svg {
+    width: 18px;
+    height: 18px;
+  }
+  .rm-close:hover {
+    background: rgba(159, 179, 163, 0.22);
+    color: var(--pine-deep);
+  }
+
+  /* ---- Heading ---- */
+  #rm-title,
+  .rm-success h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--pine-deep);
+    line-height: 1.2;
+  }
+
+  .rm-sub {
+    margin: 6px 0 24px;
+    font-size: 0.98rem;
+    color: var(--moss);
+  }
+
+  /* ---- Fields ---- */
+  .rm-field {
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  .rm-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--pine);
+  }
+  .rm-label em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--moss);
+    opacity: 0.8;
+  }
+
+  .rm-field input,
+  .rm-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1.5px solid rgba(45, 51, 48, 0.18);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-family: 'Karla', sans-serif;
+    font-size: 0.96rem;
+    color: var(--ink);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .rm-field textarea {
+    resize: vertical;
+    min-height: 88px;
+  }
+
+  .rm-field input::placeholder,
+  .rm-field textarea::placeholder {
+    color: rgba(45, 51, 48, 0.4);
+  }
+
+  .rm-field input:focus,
+  .rm-field textarea:focus {
+    outline: none;
+    border-color: var(--moss);
+    box-shadow: 0 0 0 3px rgba(159, 179, 163, 0.32);
+  }
+
+  .rm-field input:user-invalid {
+    border-color: #b5483f;
+  }
+
+  /* ---- Submit ---- */
+  .rm-submit {
+    width: 100%;
+    margin-top: 6px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: var(--pine);
+    color: var(--paper);
+    font-family: 'Karla', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .rm-submit:hover {
+    background: var(--pine-deep);
+    transform: translateY(-1px);
+  }
+  .rm-submit:disabled {
+    opacity: 0.65;
+    cursor: default;
+    transform: none;
+  }
+
+  /* ---- Success state ---- */
+  .rm-success {
+    text-align: center;
+    padding: 8px 0 4px;
+  }
+  .rm-check {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(159, 179, 163, 0.28);
+    color: var(--pine);
+  }
+  .rm-check svg {
+    width: 28px;
+    height: 28px;
+  }
+  .rm-success p {
+    margin: 8px auto 24px;
+    max-width: 34ch;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .rm-done {
+    padding: 11px 28px;
+    border: 1.5px solid var(--moss);
+    border-radius: 99px;
+    background: transparent;
+    color: var(--pine);
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .rm-done:hover {
+    background: rgba(159, 179, 163, 0.18);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rm-backdrop,
+    .rm-card {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .rm-card {
+      padding: 26px 22px;
+    }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('resume-modal');
+
+  if (modal) {
+    const form = modal.querySelector<HTMLFormElement>('#rm-form')!;
+    const successView = modal.querySelector<HTMLElement>('.rm-success')!;
+    const submitBtn = modal.querySelector<HTMLButtonElement>('.rm-submit')!;
+    const firstInput = modal.querySelector<HTMLInputElement>('input[name="name"]');
+    const endpoint = modal.dataset.endpoint || '';
+    const toEmail = modal.dataset.email || '';
+    let lastFocused: HTMLElement | null = null;
+
+    const open = () => {
+      lastFocused = document.activeElement as HTMLElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => modal.classList.add('open'));
+      window.setTimeout(() => firstInput?.focus(), 60);
+    };
+
+    const close = () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      lastFocused?.focus?.();
+      window.setTimeout(() => {
+        modal.hidden = true;
+        form.hidden = false;
+        successView.hidden = true;
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send request';
+      }, 220);
+    };
+
+    // Open from any element marked with data-resume-request
+    document.querySelectorAll('[data-resume-request]').forEach((el) =>
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        open();
+      })
+    );
+
+    // Close controls (X, backdrop, done button)
+    modal.querySelectorAll('[data-rm-close]').forEach((el) =>
+      el.addEventListener('click', close)
+    );
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.hidden) close();
+    });
+
+    // Basic focus trap
+    modal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+      const items = Array.from(
+        modal.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    // Submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const name = String(data.get('name') || '').trim();
+      const senderEmail = String(data.get('email') || '').trim();
+      const message = String(data.get('message') || '').trim();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      const showSuccess = () => {
+        form.hidden = true;
+        successView.hidden = false;
+      };
+
+      try {
+        if (endpoint) {
+          // Automatic delivery via a configured form endpoint (e.g. Formspree)
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: data,
+          });
+          if (!res.ok) throw new Error('Request failed');
+          showSuccess();
+        } else {
+          // No backend configured — compose an email to me with the details.
+          const subject = `Résumé request from ${name}`;
+          const body =
+            `Name: ${name}\n` +
+            `Email: ${senderEmail}\n\n` +
+            `${message || '(no message)'}`;
+          window.location.href =
+            `mailto:${toEmail}?subject=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(body)}`;
+          showSuccess();
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send request';
+        window.alert(`Something went wrong — please email me directly at ${toEmail}.`);
+      }
+    });
+  }
+</script>

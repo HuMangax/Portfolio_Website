@@ -1,0 +1,256 @@
+---
+const email = "huangmax1039@gmail.com"
+const linkedin = "https://www.linkedin.com/in/maxhuang0108"
+const github = "https://github.com/HuMangax"
+const year = new Date().getFullYear()
+---
+
+<section id="contact">
+  <div class="wrap">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="reveal">Let's build something together.</h2>
+    <p class="lead reveal">
+      I'm currently looking for <strong>Internship</strong> opportunities — and always happy
+      to talk about software, games, or a good cup of coffee.
+    </p>
+
+    <div class="links reveal">
+      <a class="btn-primary" href={`mailto:${email}`}>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="m22 7-10 5L2 7" />
+        </svg>
+        Email me
+      </a>
+      <a class="btn-ghost" href={linkedin} target="_blank" rel="noopener noreferrer">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+        </svg>
+        LinkedIn
+      </a>
+      <a class="btn-ghost" href={github} target="_blank" rel="noopener noreferrer">
+        <svg class="ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.9.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.06.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+        </svg>
+        GitHub
+      </a>
+    </div>
+
+    <p class="email-plain reveal">{email}</p>
+  </div>
+
+  <div class="footer-line">
+    <span>© {year} Max Huang</span>
+  </div>
+
+  <!-- Treeline closer — bookends the hero -->
+  <svg class="treeline" viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax meet" aria-hidden="true" fill="var(--sage)">
+    <path d="M20 200 L60 70 L100 200 Z" />
+    <path d="M120 200 L150 120 L180 200 Z" />
+    <path d="M230 200 L275 50 L320 200 Z" />
+    <path d="M360 200 L390 115 L420 200 Z" />
+    <path d="M480 200 L525 60 L570 200 Z" />
+    <path d="M620 200 L650 110 L680 200 Z" />
+    <path d="M740 200 L785 55 L830 200 Z" />
+    <path d="M880 200 L910 115 L940 200 Z" />
+    <path d="M1000 200 L1045 65 L1090 200 Z" />
+    <path d="M1140 200 L1170 110 L1200 200 Z" />
+    <path d="M1260 200 L1305 55 L1350 200 Z" />
+    <path d="M1380 200 L1410 110 L1440 200 Z" />
+  </svg>
+</section>
+
+<style>
+  section {
+    position: relative;
+    padding: 116px 0 92px;
+    background: linear-gradient(180deg, var(--pine) 0%, var(--pine-deep) 100%);
+    color: var(--paper);
+    overflow: hidden;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    width: 30px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    color: var(--paper);
+    line-height: 1.12;
+  }
+
+  .lead {
+    margin: 22px auto 0;
+    max-width: 52ch;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: rgba(244, 241, 232, 0.78);
+  }
+
+  .lead strong {
+    color: var(--paper);
+    font-weight: 600;
+  }
+
+  /* ---- Links ---- */
+  .links {
+    margin-top: 38px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 99px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--paper);
+    color: var(--pine-deep);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-ghost {
+    border: 1.5px solid rgba(159, 179, 163, 0.6);
+    color: var(--paper);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(159, 179, 163, 0.16);
+    transform: translateY(-2px);
+  }
+
+  .ico {
+    width: 17px;
+    height: 17px;
+  }
+
+  .email-plain {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: rgba(159, 179, 163, 0.85);
+  }
+
+  /* ---- Footer ---- */
+  .footer-line {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin: 96px auto 0;
+    padding: 22px 24px 0;
+    border-top: 1px solid rgba(159, 179, 163, 0.18);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgba(159, 179, 163, 0.7);
+  }
+
+  /* ---- Treeline ---- */
+  .treeline {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-width: 900px;
+    opacity: 0.12;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ---- Scroll reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 560px) {
+    section {
+      padding: 88px 0 72px;
+    }
+    .footer-line {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  const els = document.querySelectorAll('#contact .reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>

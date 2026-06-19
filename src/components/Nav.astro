@@ -1,0 +1,282 @@
+---
+const links = [
+  { label: "About", id: "about" },
+  { label: "Skills", id: "skills" },
+  { label: "Experience", id: "experience" },
+  { label: "Projects", id: "projects" },
+  { label: "Contact", id: "contact" },
+]
+---
+
+<nav id="nav" class="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 3 L19 17 H5 Z" />
+        <rect x="10.6" y="16" width="2.8" height="5" rx="0.5" />
+      </svg>
+      <span>Max Huang</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      {links.map((link) => (
+        <li>
+          <a href={`#${link.id}`} data-section={link.id}>{link.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav.scrolled {
+    background: rgba(244, 241, 232, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom-color: rgba(45, 51, 48, 0.1);
+    box-shadow: 0 6px 20px -16px rgba(29, 48, 39, 0.5);
+  }
+
+  /* ---- Scroll progress ---- */
+  .scroll-progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left center;
+    background: linear-gradient(90deg, var(--moss), var(--pine));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav.scrolled .scroll-progress {
+    opacity: 1;
+  }
+
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ---- Brand ---- */
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    color: var(--pine-deep);
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    width: 19px;
+    height: 19px;
+    color: var(--moss);
+    flex-shrink: 0;
+  }
+
+  /* ---- Links ---- */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    position: relative;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--moss);
+    transition: width 0.25s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--moss);
+  }
+
+  .nav-links a.active {
+    color: var(--pine);
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    width: 100%;
+  }
+
+  /* ---- Hamburger ---- */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--pine-deep);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 720px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 6px 24px 16px;
+      background: rgba(244, 241, 232, 0.97);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(45, 51, 48, 0.1);
+      box-shadow: 0 12px 24px -18px rgba(29, 48, 39, 0.6);
+      opacity: 0;
+      transform: translateY(-12px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .nav-links.open {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .nav-links li {
+      width: 100%;
+      border-top: 1px solid rgba(45, 51, 48, 0.08);
+    }
+    .nav-links li:first-child {
+      border-top: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 13px 2px;
+    }
+    .nav-links a::after {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('nav');
+  if (nav) {
+    const toggle = nav.querySelector('.nav-toggle');
+    const linksWrap = nav.querySelector('.nav-links');
+    const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('.nav-links a'));
+
+    // Translucent backdrop + scroll-progress bar
+    const progressBar = nav.querySelector<HTMLElement>('.scroll-progress');
+    const onScroll = () => {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 40);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(y / docHeight, 1) : 0;
+      if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    // Mobile menu toggle
+    const closeMenu = () => {
+      linksWrap?.classList.remove('open');
+      toggle?.classList.remove('is-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    };
+    toggle?.addEventListener('click', () => {
+      const open = linksWrap?.classList.toggle('open');
+      toggle.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(!!open));
+    });
+    links.forEach((a) => a.addEventListener('click', closeMenu));
+
+    // Scrollspy — highlight the section currently in view
+    const byId: Record<string, HTMLAnchorElement> = {};
+    links.forEach((a) => { if (a.dataset.section) byId[a.dataset.section] = a; });
+    const sections = links
+      .map((a) => document.getElementById(a.dataset.section || ''))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if ('IntersectionObserver' in window) {
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            links.forEach((l) => l.classList.remove('active'));
+            byId[e.target.id]?.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      sections.forEach((s) => spy.observe(s));
+    }
+  }
+</script>

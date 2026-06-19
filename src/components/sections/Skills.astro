@@ -1,0 +1,175 @@
+---
+import { skills } from "../../data/skills"
+---
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Skills</p>
+      <h2>What I work with</h2>
+    </div>
+
+    <div class="skills">
+      {skills.map((group) => (
+        <div class="row reveal">
+          <p class="row-label">{group.category}</p>
+          <ul class="chips">
+            {group.items.map((item) => <li class="chip">{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 108px 0;
+    background: var(--paper-dim);
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Section heading ---- */
+  .sec-head {
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .eyebrow::after {
+    content: "";
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    color: var(--pine-deep);
+    line-height: 1.15;
+  }
+
+  /* ---- Skill rows (spec-sheet layout) ---- */
+  .skills {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 32px;
+    padding: 30px 0;
+    align-items: start;
+  }
+
+  .row + .row {
+    border-top: 1px solid rgba(45, 51, 48, 0.12);
+  }
+
+  .row-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--moss);
+    padding-top: 7px;
+  }
+
+  .chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .chip {
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--pine);
+    background: rgba(159, 179, 163, 0.32);
+    padding: 7px 15px;
+    border-radius: 99px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .chip:hover {
+    background: rgba(159, 179, 163, 0.55);
+    transform: translateY(-2px);
+  }
+
+  /* ---- Scroll reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .chip {
+      transition: none;
+    }
+  }
+
+  /* ---- Mobile ---- */
+  @media (max-width: 720px) {
+    section {
+      padding: 84px 0;
+    }
+    .row {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 24px 0;
+    }
+    .row-label {
+      padding-top: 0;
+    }
+  }
+</style>
+
+<script>
+  const els = document.querySelectorAll('#skills .reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach((el) => el.classList.add('in'));
+  }
+</script>
