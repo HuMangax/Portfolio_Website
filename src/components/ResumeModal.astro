@@ -1,8 +1,8 @@
 ---
 // Submissions go to Netlify Forms (see the form's `data-netlify` attribute below).
 // They appear in your Netlify dashboard under Forms → "resume-request"; add an
-// email notification there to be alerted. The address below is only used as an
-// offline fallback when the site isn't running on Netlify.
+// email notification there to be alerted. The address below is shown as a
+// fallback contact only if a submission ever fails.
 const email = "huangmax1039@gmail.com";
 const formName = "resume-request";
 ---
@@ -49,6 +49,7 @@ const formName = "resume-request";
       </label>
 
       <button type="submit" class="rm-submit">Send request</button>
+      <p class="rm-error" role="alert" hidden></p>
     </form>
 
     <div class="rm-success" hidden>
@@ -234,6 +235,18 @@ const formName = "resume-request";
     transform: none;
   }
 
+  .rm-error {
+    margin: 12px 0 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: center;
+    color: #b5483f;
+  }
+  .rm-error a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
   /* ---- Success state ---- */
   .rm-success {
     text-align: center;
@@ -296,6 +309,7 @@ const formName = "resume-request";
     const form = modal.querySelector<HTMLFormElement>('#rm-form')!;
     const successView = modal.querySelector<HTMLElement>('.rm-success')!;
     const submitBtn = modal.querySelector<HTMLButtonElement>('.rm-submit')!;
+    const errorEl = modal.querySelector<HTMLElement>('.rm-error')!;
     const firstInput = modal.querySelector<HTMLInputElement>('input[name="name"]');
     const toEmail = modal.dataset.email || '';
     let lastFocused: HTMLElement | null = null;
@@ -319,6 +333,7 @@ const formName = "resume-request";
         form.reset();
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send request';
+        errorEl.hidden = true;
       }, 220);
     };
 
@@ -365,13 +380,24 @@ const formName = "resume-request";
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
+      errorEl.hidden = true;
 
       const showSuccess = () => {
         form.hidden = true;
         successView.hidden = false;
       };
 
-      // Netlify expects url-encoded body including the hidden `form-name` field.
+      // Netlify Forms only processes submissions on the deployed site. When
+      // previewing locally there's nothing to receive the POST, so just show
+      // the success UI (no real submission is recorded until deployed).
+      const isLocal = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+      if (isLocal) {
+        console.info('[resume form] Local preview — submissions are only recorded on the deployed Netlify site.');
+        showSuccess();
+        return;
+      }
+
+      // Netlify expects a url-encoded body including the hidden `form-name` field.
       const params = new URLSearchParams();
       new FormData(form).forEach((value, key) => params.append(key, String(value)));
 
@@ -384,16 +410,11 @@ const formName = "resume-request";
         if (!res.ok) throw new Error(`Form post failed (${res.status})`);
         showSuccess();
       } catch (err) {
-        // Fallback (e.g. previewing outside Netlify): compose an email instead.
-        const name = params.get('name') || '';
-        const senderEmail = params.get('email') || '';
-        const message = params.get('message') || '';
-        const subject = `Resume request from ${name}`;
-        const body = `Name: ${name}\nEmail: ${senderEmail}\n\n${message || '(no message)'}`;
-        window.location.href =
-          `mailto:${toEmail}?subject=${encodeURIComponent(subject)}` +
-          `&body=${encodeURIComponent(body)}`;
-        showSuccess();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send request';
+        errorEl.innerHTML =
+          `Couldn't send just now — please email me at <a href="mailto:${toEmail}">${toEmail}</a>.`;
+        errorEl.hidden = false;
       }
     });
   }
