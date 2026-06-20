@@ -1,22 +1,29 @@
 ---
-import { skills } from "../../data/skills"
+const courses = [
+  "Data Structures & Algorithms",
+  "Software Construction",
+  "Relational Databases",
+  "Machine Learning",
+  "Artificial Intelligence",
+  "Computer Graphics",
+  "Computer Networking",
+  "Data Analytics",
+]
 ---
 
-<section id="skills">
+<section id="education">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2>Skills</h2>
+      <h2>Education</h2>
     </div>
 
-    <div class="skills">
-      {skills.map((group) => (
-        <div class="row reveal">
-          <p class="row-label">{group.category}</p>
-          <ul class="chips">
-            {group.items.map((item) => <li class="chip">{item}</li>)}
-          </ul>
-        </div>
-      ))}
+    <div class="edu-card reveal">
+      <h3>University of British Columbia</h3>
+      <p class="edu-meta">BSc Computer Science · Sep 2022 – May 2028 (expected)</p>
+      <h4>Relevant coursework</h4>
+      <ul class="course-list">
+        {courses.map((c) => <li>{c}</li>)}
+      </ul>
     </div>
   </div>
 </section>
@@ -24,6 +31,7 @@ import { skills } from "../../data/skills"
 <style>
   section {
     padding: 108px 0;
+    background: var(--paper-dim);
   }
 
   .wrap {
@@ -34,7 +42,7 @@ import { skills } from "../../data/skills"
 
   /* ---- Section heading ---- */
   .sec-head {
-    margin-bottom: 48px;
+    margin-bottom: 52px;
   }
 
   .eyebrow {
@@ -43,9 +51,6 @@ import { skills } from "../../data/skills"
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--moss);
-    display: flex;
-    align-items: center;
-    gap: 12px;
     margin-bottom: 14px;
   }
 
@@ -57,55 +62,55 @@ import { skills } from "../../data/skills"
     line-height: 1.15;
   }
 
-  /* ---- Skill rows (spec-sheet layout) ---- */
-  .skills {
-    display: flex;
-    flex-direction: column;
+  /* ---- Education card ---- */
+  .edu-card {
+    background: #fff;
+    border: 1px solid rgba(45, 51, 48, 0.12);
+    border-radius: 18px;
+    padding: 32px 34px;
+    max-width: 760px;
   }
 
-  .row {
-    display: grid;
-    grid-template-columns: 210px 1fr;
-    gap: 32px;
-    padding: 30px 0;
-    align-items: start;
+  .edu-card h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: var(--pine-deep);
+    line-height: 1.3;
   }
 
-  .row + .row {
-    border-top: 1px solid rgba(45, 51, 48, 0.12);
-  }
-
-  .row-label {
+  .edu-meta {
     font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--moss);
+    margin: 10px 0 24px;
+    letter-spacing: 0.04em;
+  }
+
+  .edu-card h4 {
     font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--moss);
-    padding-top: 7px;
+    margin-bottom: 12px;
   }
 
-  .chips {
+  .course-list {
     list-style: none;
-    margin: 0;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 9px;
   }
 
-  .chip {
-    font-size: 0.86rem;
+  .course-list li {
+    font-size: 0.82rem;
     font-weight: 600;
     color: var(--pine);
-    background: rgba(159, 179, 163, 0.32);
-    padding: 7px 15px;
+    background: rgba(159, 179, 163, 0.28);
+    padding: 6px 14px;
     border-radius: 99px;
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-
-  .chip:hover {
-    background: rgba(159, 179, 163, 0.55);
-    transform: translateY(-2px);
   }
 
   /* ---- Scroll reveal ---- */
@@ -126,29 +131,21 @@ import { skills } from "../../data/skills"
       transform: none;
       transition: none;
     }
-    .chip {
-      transition: none;
-    }
   }
 
   /* ---- Mobile ---- */
-  @media (max-width: 720px) {
+  @media (max-width: 640px) {
     section {
       padding: 84px 0;
     }
-    .row {
-      grid-template-columns: 1fr;
-      gap: 14px;
-      padding: 24px 0;
-    }
-    .row-label {
-      padding-top: 0;
+    .edu-card {
+      padding: 26px 22px;
     }
   }
 </style>
 
 <script>
-  const els = document.querySelectorAll('#skills .reveal');
+  const els = document.querySelectorAll('#education .reveal');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {

@@ -3,12 +3,9 @@ import ProjectCard from "../ui/ProjectCard.tsx"
 import { projects } from "../../data/projects"
 ---
 
-<section id="projects" class="py-28" style="background: var(--paper-dim)">
+<section id="projects" class="py-28">
   <div class="max-w-5xl mx-auto px-6">
-    <p class="font-mono text-xs tracking-widest uppercase mb-3" style="color: var(--moss)">Projects</p>
-    <h2 class="font-serif text-4xl mb-14" style="color: var(--pine-deep)">
-      Things I've built — for work and for fun.
-    </h2>
+    <h2 class="sec-title">Projects</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {projects.map(project => (
         <ProjectCard client:visible {...project} />
@@ -16,3 +13,15 @@ import { projects } from "../../data/projects"
     </div>
   </div>
 </section>
+
+<style>
+  /* match the other sections' headings exactly */
+  .sec-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    line-height: 1.15;
+    color: var(--pine-deep);
+    margin-bottom: 52px;
+  }
+</style>

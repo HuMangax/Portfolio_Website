@@ -1,7 +1,7 @@
 export type Experience = {
   role: string
   company: string
-  kind: string
+  location: string
   date: string
   bullets: string[]
   tags: string[]
@@ -11,8 +11,8 @@ export const experience: Experience[] = [
   {
     role: "Software Engineer Intern",
     company: "DataVisor",
-    kind: "Internship",
-    date: "Jan – Apr 2026",
+    location: "Remote, BC",
+    date: "Jan 2026 – Apr 2026",
     bullets: [
       "Designed and maintained a robust automation framework using Java and Selenium WebDriver, reducing manual regression testing time by 80%.",
       "Automated 30+ test cases, saving over 20 manual testing hours per sprint.",
@@ -24,7 +24,7 @@ export const experience: Experience[] = [
   {
     role: "Event Project Manager",
     company: "UBC Taiwan Association",
-    kind: "Leadership",
+    location: "Vancouver, BC",
     date: "Sep 2023 – Apr 2026",
     bullets: [
       "Coordinated 15+ successful events with attendance of up to 100+ UBC students, collaborating within a 10-person executive team.",
@@ -36,7 +36,7 @@ export const experience: Experience[] = [
   {
     role: "Shift Leader",
     company: "Pearl Fever Tea House",
-    kind: "Part-time",
+    location: "Vancouver, BC",
     date: "Sep 2023 – Jan 2026",
     bullets: [
       "Led shift operations alongside a team of 15 baristas, optimizing communication to keep customer service fast and efficient.",

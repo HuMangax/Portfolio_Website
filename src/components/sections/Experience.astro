@@ -5,8 +5,7 @@ import { experience } from "../../data/experience"
 <section id="experience">
   <div class="wrap">
     <div class="sec-head reveal">
-      <p class="eyebrow">Experience</p>
-      <h2>Where I've worked</h2>
+      <h2>Experience</h2>
     </div>
 
     <ol class="timeline">
@@ -19,7 +18,7 @@ import { experience } from "../../data/experience"
                 <p class="company">{item.company}</p>
               </div>
               <div class="meta">
-                <span class="kind">{item.kind}</span>
+                <span class="location">{item.location}</span>
                 <span class="date">{item.date}</span>
               </div>
             </div>
@@ -41,6 +40,7 @@ import { experience } from "../../data/experience"
 <style>
   section {
     padding: 108px 0;
+    background: var(--paper-dim);
   }
 
   .wrap {
@@ -64,14 +64,6 @@ import { experience } from "../../data/experience"
     align-items: center;
     gap: 12px;
     margin-bottom: 14px;
-  }
-
-  .eyebrow::after {
-    content: "";
-    flex: 1;
-    max-width: 60px;
-    height: 1px;
-    background: var(--sage);
   }
 
   h2 {
@@ -189,7 +181,7 @@ import { experience } from "../../data/experience"
     letter-spacing: 0.02em;
   }
 
-  /* ---- Bullets (little pine-triangle markers) ---- */
+  /* ---- Bullets ---- */
   .bullets {
     list-style: none;
     margin: 18px 0 0;
@@ -201,7 +193,7 @@ import { experience } from "../../data/experience"
 
   .bullets li {
     position: relative;
-    padding-left: 22px;
+    padding-left: 20px;
     font-size: 0.95rem;
     line-height: 1.65;
     color: var(--ink);
@@ -211,10 +203,11 @@ import { experience } from "../../data/experience"
     content: "";
     position: absolute;
     left: 2px;
-    top: 7px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 8px solid var(--sage);
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--moss);
   }
 
   /* ---- Tags ---- */

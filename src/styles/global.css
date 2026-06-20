@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* Map Tailwind's font utilities to the site fonts so `font-serif`/`font-mono`/
+   `font-sans` (used in the Projects section + cards) match the rest of the site. */
+@theme {
+  --font-sans: 'Karla', sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
 :root {
   --pine: #1d3027;
   --pine-deep: #16261f;

@@ -36,7 +36,7 @@ export default function ProjectCard({ title, date, description, tags, image, ima
       )}
       <div className="p-8 flex flex-col gap-4 flex-1">
         <div className="flex justify-between items-start gap-3">
-          <h3 className="font-serif text-xl leading-snug" style={{ color: "var(--pine-deep)" }}>
+          <h3 className="font-serif font-semibold text-xl leading-snug" style={{ color: "var(--pine-deep)" }}>
             {title}
           </h3>
           <span className="flex items-center gap-1 text-xs font-mono whitespace-nowrap mt-1" style={{ color: "var(--moss)" }}>

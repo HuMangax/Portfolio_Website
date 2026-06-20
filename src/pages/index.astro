@@ -5,6 +5,7 @@ import Nav from '../components/Nav.astro'
 import Hero from '../components/sections/Hero.astro'
 import About from '../components/sections/About.astro'
 import Experience from '../components/sections/Experience.astro'
+import Education from '../components/sections/Education.astro'
 import Skills from '../components/sections/Skills.astro'
 import Contact from '../components/sections/Contacts.astro'
 import ResumeModal from '../components/ResumeModal.astro'
@@ -14,14 +15,37 @@ import ResumeModal from '../components/ResumeModal.astro'
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Max Huang</title>
+    <title>Max Huang — Software Engineer</title>
+    <meta name="description" content="Max Huang — 4th-year Computer Science student at UBC and software engineer focused on full-stack development, test automation, and AI-integrated applications." />
+    <link rel="canonical" href="https://maxhuang.netlify.app/" />
+
+    <!-- Open Graph (link previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Max Huang" />
+    <meta property="og:url" content="https://maxhuang.netlify.app/" />
+    <meta property="og:title" content="Max Huang — Software Engineer" />
+    <meta property="og:description" content="4th-year CS @ UBC — full-stack development, test automation, and AI-integrated apps." />
+    <meta property="og:image" content="https://maxhuang.netlify.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Max Huang — Software Engineer" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Max Huang — Software Engineer" />
+    <meta name="twitter:description" content="4th-year CS @ UBC — full-stack development, test automation, and AI-integrated apps." />
+    <meta name="twitter:image" content="https://maxhuang.netlify.app/og.png" />
+
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body>
     <Nav />
     <Hero />
     <About />
+    <Education />
     <Skills />
     <Experience />
     <Projects />
