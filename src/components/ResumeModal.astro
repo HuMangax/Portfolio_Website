@@ -1,12 +1,13 @@
 ---
+// Submissions go to Netlify Forms (see the form's `data-netlify` attribute below).
+// They appear in your Netlify dashboard under Forms → "resume-request"; add an
+// email notification there to be alerted. The address below is only used as an
+// offline fallback when the site isn't running on Netlify.
 const email = "huangmax1039@gmail.com";
-// Optional: set this to a form endpoint (e.g. a Formspree URL like
-// "https://formspree.io/f/xxxxxxx") to have requests delivered automatically.
-// When left empty, submitting composes an email to the address above instead.
-const FORM_ENDPOINT = "";
+const formName = "resume-request";
 ---
 
-<div class="resume-modal" id="resume-modal" data-endpoint={FORM_ENDPOINT} data-email={email} hidden>
+<div class="resume-modal" id="resume-modal" data-email={email} hidden>
   <div class="rm-backdrop" data-rm-close></div>
 
   <div class="rm-card" role="dialog" aria-modal="true" aria-labelledby="rm-title">
@@ -16,8 +17,20 @@ const FORM_ENDPOINT = "";
       </svg>
     </button>
 
-    <form class="rm-form" id="rm-form" novalidate>
-      <h2 id="rm-title">Request résumé</h2>
+    <form
+      class="rm-form"
+      id="rm-form"
+      name={formName}
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      novalidate
+    >
+      <input type="hidden" name="form-name" value={formName} />
+      <p class="rm-hp" hidden>
+        <label>Leave this field empty: <input name="bot-field" /></label>
+      </p>
+      <h2 id="rm-title">Request Resume</h2>
       <p class="rm-sub">I'll send it over to you directly.</p>
 
       <label class="rm-field">
@@ -45,7 +58,7 @@ const FORM_ENDPOINT = "";
         </svg>
       </div>
       <h2>Request sent</h2>
-      <p>Thanks — I'll get my résumé over to you shortly.</p>
+      <p>Thanks — I'll get my resume over to you shortly.</p>
       <button type="button" class="rm-done" data-rm-close>Close</button>
     </div>
   </div>
@@ -284,7 +297,6 @@ const FORM_ENDPOINT = "";
     const successView = modal.querySelector<HTMLElement>('.rm-success')!;
     const submitBtn = modal.querySelector<HTMLButtonElement>('.rm-submit')!;
     const firstInput = modal.querySelector<HTMLInputElement>('input[name="name"]');
-    const endpoint = modal.dataset.endpoint || '';
     const toEmail = modal.dataset.email || '';
     let lastFocused: HTMLElement | null = null;
 
@@ -346,15 +358,10 @@ const FORM_ENDPOINT = "";
       }
     });
 
-    // Submit
+    // Submit to Netlify Forms (active once deployed on Netlify).
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
-
-      const data = new FormData(form);
-      const name = String(data.get('name') || '').trim();
-      const senderEmail = String(data.get('email') || '').trim();
-      const message = String(data.get('message') || '').trim();
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
@@ -364,32 +371,29 @@ const FORM_ENDPOINT = "";
         successView.hidden = false;
       };
 
+      // Netlify expects url-encoded body including the hidden `form-name` field.
+      const params = new URLSearchParams();
+      new FormData(form).forEach((value, key) => params.append(key, String(value)));
+
       try {
-        if (endpoint) {
-          // Automatic delivery via a configured form endpoint (e.g. Formspree)
-          const res = await fetch(endpoint, {
-            method: 'POST',
-            headers: { Accept: 'application/json' },
-            body: data,
-          });
-          if (!res.ok) throw new Error('Request failed');
-          showSuccess();
-        } else {
-          // No backend configured — compose an email to me with the details.
-          const subject = `Résumé request from ${name}`;
-          const body =
-            `Name: ${name}\n` +
-            `Email: ${senderEmail}\n\n` +
-            `${message || '(no message)'}`;
-          window.location.href =
-            `mailto:${toEmail}?subject=${encodeURIComponent(subject)}` +
-            `&body=${encodeURIComponent(body)}`;
-          showSuccess();
-        }
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
+        });
+        if (!res.ok) throw new Error(`Form post failed (${res.status})`);
+        showSuccess();
       } catch (err) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send request';
-        window.alert(`Something went wrong — please email me directly at ${toEmail}.`);
+        // Fallback (e.g. previewing outside Netlify): compose an email instead.
+        const name = params.get('name') || '';
+        const senderEmail = params.get('email') || '';
+        const message = params.get('message') || '';
+        const subject = `Resume request from ${name}`;
+        const body = `Name: ${name}\nEmail: ${senderEmail}\n\n${message || '(no message)'}`;
+        window.location.href =
+          `mailto:${toEmail}?subject=${encodeURIComponent(subject)}` +
+          `&body=${encodeURIComponent(body)}`;
+        showSuccess();
       }
     });
   }
