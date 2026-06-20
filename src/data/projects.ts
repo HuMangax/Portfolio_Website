@@ -45,6 +45,6 @@ export const projects: Project[] = [
     date: "Sept 2024 - Dec 2024",
     description: "Developed a Minesweeper game in Java using OOP principles, featuring a dynamic bomb randomizer, brute-force tile-uncovering algorithm, and a multi-screen Java Swing UI.",
     tags: ["Java", "JUnit", "JSwing", "OOP", "School project"],
-    //image: "/images/projects/minesweeper-game.png",
+    image: "/images/projects/minesweeper-game.png",
   }
 ]
